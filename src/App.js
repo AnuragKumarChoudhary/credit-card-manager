@@ -11,11 +11,11 @@ function App() {
     "other": 1
   }
 
-  let [gasAmt, setGasAmt] = useState(0);
-  let [groceryAmt, setGroceryAmt] = useState(0);
-  let [diningAmt, setDiningAmt] = useState(0);
-  let [verizonAmt, setVerizonAmt] = useState(0);
-  let [otherAmt, setOtherAmt] = useState(0);
+  let [gasAmt, setGasAmt] = useState('');
+  let [groceryAmt, setGroceryAmt] = useState('');
+  let [diningAmt, setDiningAmt] = useState('');
+  let [verizonAmt, setVerizonAmt] = useState('');
+  let [otherAmt, setOtherAmt] = useState('');
   let [totalAmt, setTotalAmt] = useState(0);
 
   let [pvdeGasAmt, setPvdeGasAmt] = useState(0);
@@ -26,42 +26,42 @@ function App() {
   let [pvdeTotalAmt, setPvdeTotalAmt] = useState(0);
 
   function setGasAmount(event) {
-    if (event && event.target && event.target.value) {
+    if (event.target.value && parseFloat(event.target.value)>0) {
       setGasAmt(parseFloat(event.target.value));
     } else {
-      setGasAmt(0)
+      setGasAmt('')
     }
   }
 
   function setGroceryAmount(event) {
-    if (event && event.target && event.target.value) {
+    if (event.target.value && parseFloat(event.target.value)>0) {
       setGroceryAmt(parseFloat(event.target.value));
     } else {
-      setGroceryAmt(0)
+      setGroceryAmt('')
     }
   }
 
   function setDiningAmount(event) {
-    if (event && event.target && event.target.value) {
+    if (event.target.value && parseFloat(event.target.value)>0) {
       setDiningAmt(parseFloat(event.target.value));
     } else {
-      setDiningAmt(0)
+      setDiningAmt('')
     }
   }
 
   function setVerizonAmount(event) {
-    if (event && event.target && event.target.value) {
+    if (event.target.value && parseFloat(event.target.value)>0) {
       setVerizonAmt(parseFloat(event.target.value));
     } else {
-      setVerizonAmt(0)
+      setVerizonAmt('')
     }
   }
 
   function setOtherAmount(event) {
-    if (event && event.target && event.target.value) {
+    if (event.target.value && parseFloat(event.target.value)>0) {
       setOtherAmt(parseFloat(event.target.value));
     } else {
-      setOtherAmt(0)
+      setOtherAmt('')
     }
   }
 
@@ -81,11 +81,15 @@ function App() {
   }
 
   function calculateTotal() {
-    setTotalAmt(parseFloat((gasAmt + groceryAmt + diningAmt + verizonAmt + otherAmt).toFixed(2)));
+    if (parseFloat(gasAmt) && parseFloat(groceryAmt) && parseFloat(diningAmt) && parseFloat(verizonAmt) && parseFloat(otherAmt)) {
+      setTotalAmt(parseFloat((gasAmt + groceryAmt + diningAmt + verizonAmt + otherAmt).toFixed(2)));
+    }
   }
 
   function calculatePVDETotal() {
-    setPvdeTotalAmt(parseFloat((pvdeGasAmt + pvdeGroceryAmt + pvdeDiningAmt + pvdeVerizonAmt + pvdeOtherAmt).toFixed(2)));
+    if (parseFloat(gasAmt) && parseFloat(groceryAmt) && parseFloat(diningAmt) && parseFloat(verizonAmt) && parseFloat(otherAmt)) {
+      setPvdeTotalAmt(parseFloat((pvdeGasAmt + pvdeGroceryAmt + pvdeDiningAmt + pvdeVerizonAmt + pvdeOtherAmt).toFixed(2)));
+    }
   }
 
   return (
