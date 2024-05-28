@@ -26,7 +26,7 @@ function App() {
   let [pvdeTotalAmt, setPvdeTotalAmt] = useState(0);
 
   function setGasAmount(event) {
-    if (event.target.value && parseFloat(event.target.value)>0) {
+    if (event.target.value && parseFloat(event.target.value) > 0) {
       setGasAmt(parseFloat(event.target.value));
     } else {
       setGasAmt('')
@@ -34,7 +34,7 @@ function App() {
   }
 
   function setGroceryAmount(event) {
-    if (event.target.value && parseFloat(event.target.value)>0) {
+    if (event.target.value && parseFloat(event.target.value) > 0) {
       setGroceryAmt(parseFloat(event.target.value));
     } else {
       setGroceryAmt('')
@@ -42,7 +42,7 @@ function App() {
   }
 
   function setDiningAmount(event) {
-    if (event.target.value && parseFloat(event.target.value)>0) {
+    if (event.target.value && parseFloat(event.target.value) > 0) {
       setDiningAmt(parseFloat(event.target.value));
     } else {
       setDiningAmt('')
@@ -50,7 +50,7 @@ function App() {
   }
 
   function setVerizonAmount(event) {
-    if (event.target.value && parseFloat(event.target.value)>0) {
+    if (event.target.value && parseFloat(event.target.value) > 0) {
       setVerizonAmt(parseFloat(event.target.value));
     } else {
       setVerizonAmt('')
@@ -58,7 +58,7 @@ function App() {
   }
 
   function setOtherAmount(event) {
-    if (event.target.value && parseFloat(event.target.value)>0) {
+    if (event.target.value && parseFloat(event.target.value) > 0) {
       setOtherAmt(parseFloat(event.target.value));
     } else {
       setOtherAmt('')
@@ -81,15 +81,26 @@ function App() {
   }
 
   function calculateTotal() {
-    if (parseFloat(gasAmt) && parseFloat(groceryAmt) && parseFloat(diningAmt) && parseFloat(verizonAmt) && parseFloat(otherAmt)) {
-      setTotalAmt(parseFloat((gasAmt + groceryAmt + diningAmt + verizonAmt + otherAmt).toFixed(2)));
+    if (!parseFloat(gasAmt)) {
+      gasAmt = 0;
     }
+    if (!parseFloat(groceryAmt)) {
+      groceryAmt = 0;
+    }
+    if (!parseFloat(diningAmt)) {
+      diningAmt = 0;
+    }
+    if (!parseFloat(verizonAmt)) {
+      verizonAmt = 0;
+    }
+    if (!parseFloat(otherAmt)) {
+      otherAmt = 0;
+    }
+    setTotalAmt(parseFloat((gasAmt + groceryAmt + diningAmt + verizonAmt + otherAmt).toFixed(2)));
   }
 
   function calculatePVDETotal() {
-    if (parseFloat(gasAmt) && parseFloat(groceryAmt) && parseFloat(diningAmt) && parseFloat(verizonAmt) && parseFloat(otherAmt)) {
-      setPvdeTotalAmt(parseFloat((pvdeGasAmt + pvdeGroceryAmt + pvdeDiningAmt + pvdeVerizonAmt + pvdeOtherAmt).toFixed(2)));
-    }
+    setPvdeTotalAmt(parseFloat((pvdeGasAmt + pvdeGroceryAmt + pvdeDiningAmt + pvdeVerizonAmt + pvdeOtherAmt).toFixed(2)));
   }
 
   return (
@@ -109,33 +120,33 @@ function App() {
         <tbody>
           <tr>
             <td>Gas</td>
-            <td><input type="number" id="gas" min="0" value={gasAmt} onChange={setGasAmount}></input></td>
+            <td><input type="number" id="gas" min="0" value={gasAmt} onInput={setGasAmount}></input></td>
             <td>{percent["gas"]} %</td>
             <td>$ {pvdeGasAmt}</td>
           </tr>
           <tr>
             <td>Grocery Store</td>
-            <td><input type="number" id="grocery_store" min="0" value={groceryAmt} onChange={setGroceryAmount}></input></td>
+            <td><input type="number" id="grocery_store" min="0" value={groceryAmt} onInput={setGroceryAmount}></input></td>
             <td>{percent["grocery"]} %</td>
             <td>$ {pvdeGroceryAmt}</td>
           </tr>
           <tr>
             <td>Dining</td>
-            <td><input type="number" id="dining" min="0" value={diningAmt} onChange={setDiningAmount}></input>
+            <td><input type="number" id="dining" min="0" value={diningAmt} onInput={setDiningAmount}></input>
             </td>
             <td>{percent["dining"]} %</td>
             <td>$ {pvdeDiningAmt}</td>
           </tr>
           <tr>
             <td>Verizon</td>
-            <td><input type="number" id="verizon" min="0" value={verizonAmt} onChange={setVerizonAmount}></input>
+            <td><input type="number" id="verizon" min="0" value={verizonAmt} onInput={setVerizonAmount}></input>
             </td>
             <td>{percent["verizon"]} %</td>
             <td>$ {pvdeVerizonAmt}</td>
           </tr>
           <tr>
             <td>Other</td>
-            <td><input type="number" id="other" min="0" value={otherAmt} onChange={setOtherAmount}></input></td>
+            <td><input type="number" id="other" min="0" value={otherAmt} onInput={setOtherAmount}></input></td>
             <td>{percent["other"]} %</td>
             <td>$ {pvdeOtherAmt}</td>
           </tr>
